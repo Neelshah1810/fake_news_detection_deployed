@@ -6,7 +6,7 @@ This program assesses the authenticity of news headlines, determining whether th
 
 * Fake news detection is the process of identifying and filtering out false or misleading information from legitimate news content. In today's digital age, where information spreads rapidly across social media and online platforms, the ability to discern truth from deception has become increasingly crucial. The prevalence of fake news can lead to misinformation, manipulate public opinion, and even incite social unrest. As such, detecting and combating fake news is vital for maintaining the integrity of information and fostering a well-informed society.
 
-* To achieve accurate fake news detection, we leverage advanced machine learning (ML) and deep learning techniques, combined with natural language processing (NLP) and sophisticated models like GPT-4. These technologies work together to analyze the text, context, and patterns in news content, enabling the system to distinguish between authentic and fabricated stories. By training models on large datasets of real and fake news, we can create a robust detection system that continuously improves its accuracy. Artificial intelligence and machine learning (AIML) play a crucial role in this process, offering the computational power and intelligence needed to tackle the complexity of modern fake news.
+* To achieve accurate fake news detection, we leverage advanced machine learning (ML) and deep learning techniques, combined with natural language processing (NLP) and sophisticated models like Groq. These technologies work together to analyze the text, context, and patterns in news content, enabling the system to distinguish between authentic and fabricated stories. By training models on large datasets of real and fake news, we can create a robust detection system that continuously improves its accuracy. Artificial intelligence and machine learning (AIML) play a crucial role in this process, offering the computational power and intelligence needed to tackle the complexity of modern fake news.
 
 * Beyond just detecting fake news, our system offers additional features to enhance the user experience and provide more value. If the news is determined to be real, users can access more related stories to gain a deeper understanding of the topic. The platform also provides a list of the top 10 news stories of the day, ensuring users stay informed on the most important current events. Additionally, we have integrated a chatbot feature to interact with users, answer questions, and provide summaries of the news. These features create a comprehensive and user-friendly platform designed not only to detect fake news but also to enrich the overall news consumption experience.
 
@@ -20,11 +20,18 @@ This program assesses the authenticity of news headlines, determining whether th
 * Python 3.x - Ensure you have Python 3 installed.
 ##### Libraries:
 * flask - for running the web server.
-* g4f - for integrating GPT models.
+* groq - for integrating Groq models.
+* python-dotenv - for loading environment variables.
 * tensorflow or pytorch - for deep learning model support.
 * requests - for HTTP requests.
 * beautifulsoup4 - for web scraping.
 * OS Version: Compatible with Windows, macOS, and Linux.
+
+### Setup Groq API Key
+1. Obtain a Groq API key from the Groq website.
+2. Create a file named `.env` in the root directory of the project.
+3. Add your Groq API key to the `.env` file in the following format:
+   `GROQ_API_KEY=your_groq_api_key_here`
 
 ### Download Dataset for DL mpdel:
 https://drive.google.com/file/d/1AdPvtOuQ4yShzVsGlEJVrPMMH9iRS4tX/view?usp=sharing

@@ -1,29 +1,40 @@
+import os
 from flask import Flask, request, render_template, jsonify
 import features  # Import your features code
-from g4f.client import Client
 from dl_model import predict_news
+from groq import Groq
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 
-# Initialize GPT-4 client
-client = Client()
+# Initialize Groq client
+client = Groq(
+    api_key=os.getenv("GROQ_API_KEY"),
+)
 
-# Function to check news with GPT-4
-def check_news_with_gpt4(headline):
+# Function to check news with Groq
+def check_news_with_groq(headline):
     try:
         prompt = (
             f"Evaluate the following news headline and determine if it is 'Real News' or 'Fake News'. "
             f"Respond with only 'Real News' or 'Fake News'. Consider common signs of fake news such as sensationalism, lack of credible sources, and implausibility.\n\n"
             f"News Headline: '{headline}'"
         )
-        response = client.chat.completions.create(
-            model="gpt-4o",
-            messages=[{"role": "user", "content": prompt}]
+        chat_completion = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt,
+                }
+            ],
+            model="llama-3.1-8b-instant",
         )
-        result = response.choices[0].message.content.strip().lower()
-        if "real" in result:
+        result = chat_completion.choices[0].message.content.strip()
+        if "real" in result.lower():
             result = "Real News"
-        elif "fake" in result:
+        elif "fake" in result.lower():
             result = "Fake News"
         else:
             result = "Unable to determine"
@@ -39,10 +50,10 @@ def index():
 def detect_headline():
     data = request.get_json()
     headline = data.get('headline')
-    method = data.get('method')  # Get the method (dl or g4f)
+    method = data.get('method')
     
-    if method == 'g4f':
-        result = check_news_with_gpt4(headline)
+    if method == 'groq':
+        result = check_news_with_groq(headline)
     elif method == 'dl':
         result = predict_news(headline)
     else:
@@ -93,4 +104,4 @@ def check_url_safety():
         return jsonify({'result': f'Error: {str(e)}'}), 500  # Return any errors
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5001)

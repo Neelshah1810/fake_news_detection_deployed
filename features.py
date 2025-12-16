@@ -1,8 +1,14 @@
 import requests
 import urllib.parse
-from g4f.client import Client
+import os
+from groq import Groq
+from dotenv import load_dotenv
 
-client = Client()
+load_dotenv()
+
+client = Groq(
+    api_key=os.getenv("GROQ_API_KEY"),
+)
 
 def search_news(query):
     search_engine_url = "https://news.google.com/search?q="
@@ -13,17 +19,22 @@ def search_news(query):
 
 def get_response(prompt):
     try:
-        response = client.chat.completions.create(
-            model="gpt-4o",
-            messages=[{"role": "user", "content": prompt}]
+        chat_completion = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "user",
+                    "content": prompt,
+                }
+            ],
+            model="llama-3.1-8b-instant",
         )
-        return response.choices[0].message.content.strip()
+        return chat_completion.choices[0].message.content.strip()
     except Exception as e:
         return f"An error occurred: {e}"
 
 def get_top_news():
-    api_key = 'api'  # Replace with your actual API key
-    api_url = 'api-url'
+    api_key = '84b2584f4b9cf3a0f5d1d01e2678841a'  # Replace with your actual API key
+    api_url = 'https://gnews.io/api/v4/top-headlines'
     params = {
         'apikey': api_key,
         'lang': 'en',
@@ -39,8 +50,8 @@ def get_top_news():
         return []
 
 def get_top_news_for_india():
-    api_key = 'api'  # Replace with your actual API key
-    api_url = 'api-url'
+    api_key = '84b2584f4b9cf3a0f5d1d01e2678841a'  # Replace with your actual API key
+    api_url = 'https://gnews.io/api/v4/top-headlines'
     params = {
         'apikey': api_key,
         'lang': 'en',

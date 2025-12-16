@@ -3,5 +3,6 @@ transformers
 torch
 numpy
 pandas
-g4f-client
 requests
+groq
+python-dotenv
