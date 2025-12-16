@@ -5,4 +5,3 @@ numpy
 pandas
 g4f-client
 requests
-bert-tokenizer-fast
