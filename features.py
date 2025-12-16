@@ -33,7 +33,7 @@ def get_response(prompt):
         return f"An error occurred: {e}"
 
 def get_top_news():
-    api_key = '84b2584f4b9cf3a0f5d1d01e2678841a'  # Replace with your actual API key
+    api_key = os.getenv("GNEWS_API_KEY")
     api_url = 'https://gnews.io/api/v4/top-headlines'
     params = {
         'apikey': api_key,
@@ -50,7 +50,7 @@ def get_top_news():
         return []
 
 def get_top_news_for_india():
-    api_key = '84b2584f4b9cf3a0f5d1d01e2678841a'  # Replace with your actual API key
+    api_key = os.getenv("GNEWS_API_KEY")
     api_url = 'https://gnews.io/api/v4/top-headlines'
     params = {
         'apikey': api_key,
