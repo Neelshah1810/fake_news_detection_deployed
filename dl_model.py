@@ -28,7 +28,7 @@ class BERT_Arch(torch.nn.Module):
 
 # Load the model's state dict with strict=False to ignore unexpected keys
 model = BERT_Arch(AutoModel.from_pretrained('bert-base-uncased'))
-model.load_state_dict(torch.load('c1_fakenews_weights.pt', map_location=device), strict=False)
+model.load_state_dict(torch.load('weights/c1_fakenews_weights.pt', map_location=device), strict=False)
 model.to(device)
 model.eval()
 
