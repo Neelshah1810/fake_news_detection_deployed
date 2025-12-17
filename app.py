@@ -104,7 +104,6 @@ def check_url_safety():
         return jsonify({'result': f'Error: {str(e)}'}), 500  # Return any errors
 
 
-# The app is run by Gunicorn in production.
-# The Gunicorn command is specified in the render.yaml file.
-# For local development, you can use:
-# gunicorn -c gunicorn_config.py app:app
+if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 5000))
+    app.run(debug=True, host='0.0.0.0', port=port)
