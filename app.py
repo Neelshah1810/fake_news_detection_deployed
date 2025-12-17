@@ -103,5 +103,8 @@ def check_url_safety():
     except Exception as e:
         return jsonify({'result': f'Error: {str(e)}'}), 500  # Return any errors
 
-if __name__ == '__main__':
-    app.run(debug=True, port=5001)
+
+# The app is run by Gunicorn in production.
+# The Gunicorn command is specified in the render.yaml file.
+# For local development, you can use:
+# gunicorn -c gunicorn_config.py app:app

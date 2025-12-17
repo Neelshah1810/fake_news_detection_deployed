@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: fake-news-detector
+    env: python
+    plan: free # Or a paid plan if you need more resources
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn -c gunicorn_config.py app:app"
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: URL_SAFETY_API_KEY
+        sync: false
+      - key: PYTHON_VERSION
+        value: 3.9
+
+# Note: This deployment assumes that the `c1_fakenews_weights.pt` file is present in your repository.
+# If the `bert-base-uncased` model and its weights are very large, you may need to use a paid Render plan
+# for more RAM and storage. You can check the size of the model and the project to estimate the required resources.
